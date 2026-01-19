@@ -1,10 +1,11 @@
-use ark_r1cs_std::fields::fp::FpVar;
-use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError};
-use ark_bls12_381::{Bls12_381, Fr};
-use ark_groth16::Groth16;
-use ark_snark::SNARK;
-use rand::thread_rng;
-use ark_r1cs_std::alloc::AllocVar;
+use ark_r1cs_std::fields::fp::FpVar; //for circuit variables
+use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystemRef, SynthesisError}; //for defining circuits
+use ark_r1cs_std::eq::EqGadget; // for enforcing equality constraints
+use ark_bls12_381::{Bls12_381, Fr}; //elliptic curve and scalar field
+use ark_groth16::Groth16; //this is the protocol for the snark
+use ark_snark::SNARK; // provides tratis for groth
+use rand::thread_rng; //random number generator
+use ark_r1cs_std::alloc::AllocVar; // for defining variables in the circuit
 /*
 In this part, before main(), we define our circuit. The circuit is a system of polynmial equations
 defined over a finite field. They take public inputs and secret inputs. In this case x and y
@@ -77,10 +78,11 @@ fn main() {
     let y = Fr::from(2u32);
     let z = x + y; // z = 18
     
-    //println!("Secret x: {}", x);
-    //println!("Secret y: {}", y);
-    //println!("Public z (x + y): {}", z);
-    
+    println!("Secret x: {}", x);
+    println!("Secret y: {}", y);
+    println!("Public z (x + y): {}", z);
+    //sanity check
+
     // we put these values into our circuit
     let circuit = AdditionCircuit {
         x: Some(x),
