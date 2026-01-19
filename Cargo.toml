@@ -4,3 +4,12 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+# arklib crates used in addition.rs
+ark-ff = "0.4"
+ark-ec = "0.4"
+ark-r1cs-std = "0.4"
+ark-relations = "0.4"
+ark-bls12-381 = "0.4"
+ark-groth16 = "0.4"
+ark-snark = "0.4"
+rand = "0.8"
